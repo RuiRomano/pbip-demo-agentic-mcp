@@ -1,4 +1,3 @@
-
 ## CRITICAL
 - If `powerbi-modeling-mcp` MCP server is not available, stop and prompt the user to install it.
 
@@ -7,23 +6,24 @@
 ### New Semantic Model workflow
 
 - Start by creating the semantic model folder structure. Follow the content in [Semantic Model PBIP files](#semantic-model-pbip-files)
-- Use the `powerbi-modeling-mcp` MCP server to create an empty model and tools provided by the server for modeling operations. In the end serialize the database to the `definition/` folder of the semantic model.
+- Use the `powerbi-modeling-mcp` MCP server to create an empty model and tools provided by the server for modeling operations. In the end serialize the database to the `definition/` folder of the semantic model PBIP folder.
 - After the creation of the semantic model perform the following:
-  - Run the **Best Practice Analysis** by calling the script `.bpa/bpa.ps1` with arguments `-src [path to the semantic model]` and resolve critical errors found. No need to create build automation pipeline, just run the script directly as part of the development phase.
-  - Copy the `templateReport` available in the `.kb` folder to the `*.Report` folder of the semantic model report - overwrite the files that already exist with same name. Adapt the report to the semantic model, follow the instructions in `templateReport/instructions.md`. 
+  - Run the **Best Practice Analysis** by calling the script `.bpa/bpa.ps1` with arguments `-src [path to the semantic model]` and resolve critical errors found, don't forget to serialize the database back to the folder after fixes. No need to create build automation pipeline, just run the script directly as part of the development phase.
+  - Copy the `templateReport` available in the `.kb` folder to the `*.Report` folder of the semantic model report - overwrite the files that already exist with same name. 
+  - Configure the visuals of the `templateReport` to use the semantic model fields following the instructions in `templateReport/instructions.md`. 
 
 ### Semantic model development rules
 
-- Whenever there is a data source, always always create a semantic model parameter as named expression to configure the data source location.
+- Whenever there is a data source, always create semantic model parameter as named expression to configure it's location.
 - Always prefer simple star-schema modeling and not snowflake. For example if you find tables like Product, ProductSubCategory and ProductCategory. Prefer to create a single Product table that joins these tables.
 - It's ok to have partitions in 'NoData' state. Attempting to refresh might fail because there is no credential defined. 
-- Don't try to test the semantic model data, the user must do it with Power BI Desktop after authentication to the data source.
+- Don't try to test the semantic model data.
 - The relationship between Calendar and fact table should be made using a datetime column. If the fact table  dont have a datetime or date column make sure you create one using PowerQuery language
 - Make sure you set descriptions on all created measures. Follow [Semantic model descriptions rules](#semantic-model-descriptions-rules)
 - If required to create a Calendar table for time-intelligence, create it with at least the following time attributes: Year, Month, Day, Date.
-- Use named expressions primarily for parameters and data source location configuration, for the query expression prefer to add it directly in the M expression of the table.
 - Unless specified otherwise, adhere to the following naming convention in [semantic-model-naming-convention](#semantic-model-naming-convention)
 - Make sure you adhere to the DAX rules described in [DAX rules](#dax-rules)
+- Many to One or One to Many relationships, the one side should be configured on the `fromColumn` and not `toColumn` property of the relationship object.
 
 #### Semantic Model Table creation workflow
 1. Create tables with Power Query expressions, do not create named expressions for the table query. 

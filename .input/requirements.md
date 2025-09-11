@@ -12,7 +12,7 @@
 - **Server**: `dummyserver.database.windows.net`
 - **Database**: `AdventureWorksDW`
 
-If you cannot connect to the SQL Server above to get the schema, all  information of the Datawarehouse can be found in the file `AzureSQLSchema.csv`. 
+If you cannot connect to the SQL Server above to get the schema, all table information of the DataWarehouse can be found in the file `AzureSQLSchema.csv`. 
 
 
 

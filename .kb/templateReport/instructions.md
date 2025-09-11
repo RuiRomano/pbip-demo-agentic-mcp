@@ -7,6 +7,7 @@
 
 These are the files you should care about and manipulate when adapting a template report to a semantic model. All the other files, leave them as-is.
 
+    ```
     templateReport/
     ├── definition/ # stores the entire report definition: pages, visuals, bookmarks
     |   ├── /pages # Folder holding all pages of the report.
@@ -14,19 +15,18 @@ These are the files you should care about and manipulate when adapting a templat
     |   |   |   ├── /visuals
     |   |   |   |   ├── /[visualName] # Folder for each visual, inside the mainPage there are many visuals
     |   |   |   |   |   ├── visual.json # The visual.json that should be edited to reference the semantic model fields
-
+    ```
 
 
 ## Changes to apply to each visual
 
-- ONLY CHANGE the following visuals:
+ONLY CHANGE the following visuals:
 
 - **topCard**
   
   - add all the main semantic model measures to it to the max of 4 measures
-  - Add the `visual.query.queryState.Data.projections` fields for each of the measures
 
-  Example of the JSON to include:
+  Example of the JSON to modify:
 
   ```json
   {
@@ -65,7 +65,7 @@ These are the files you should care about and manipulate when adapting a templat
     - Add the date column from the Calendar table
     - Only one column
 
-    Example of the JSON to include:
+    Example of the JSON to modify:
 
     ```json
     { 
@@ -104,7 +104,7 @@ These are the files you should care about and manipulate when adapting a templat
     - Add a main category column from the model to the Category
     - Add the main measure to the Y axis    
 
-    Example of the JSON to include:
+    Example of the JSON to modify:
 
     ```json
     { 

@@ -405,7 +405,7 @@
   },
   {
     "ID": "UNNECESSARY_COLUMNS",
-    "Name": "[Maintenance] Remove unnecessary columns",
+    "Name": "[Maintenance] Remove unnecessary columns. Solution: Delete the column, hide is not enough it will still consume memory.",
     "Category": "Maintenance",
     "Description": "Hidden columns that are not referenced by any DAX expressions, relationships, hierarchy levels or Sort By-properties should be removed.",
     "Severity": 3,
