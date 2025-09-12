@@ -4,15 +4,21 @@ This repository showcases Agentic AI development in Power BI.
 
 Agentic development is a new paradigm where developers shift from writing code or using UI applications to guiding intelligent agents. The developer defines the what - the requirements, rules, and intent - and the AI agent handles the how - generating specs, implementing the model, running validations, fixing issues, and iterating toward a working solution. 
 
-In Power BI, this is made possible by open file formats with [Power BI Project file format](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) and the [TMDL language](https://learn.microsoft.com/analysis-services/tmdl/tmdl-overview), which provide structure and linting AI agents can use to reason, check, and improve their own work. 
+You can achieve agentic development in Power BI combining the following features:
+- Open file formats with [Power BI Project file format (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) with [TMDL language](https://learn.microsoft.com/analysis-services/tmdl/tmdl-overview) and [Power BI enhanced Report format (PBIR)](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop). 
+- MCP Server [powerbi-modeling-mcp](https://github.com/microsoft/powerbi-modeling-mcp)
 
 # ⚙️ How does it work?
 
-1. You describe what you need – your [requirements](.requirements/requirements-01.md) and the [rules](.resources/kb-pbip.md) the agent should follow.
-2. An AI agent turns that into a development spec – readable, reviewable, and adjustable.
-3. You say "Go" and the agent starts implementing the spec autonomously.
-4. It runs its own best practice checks, fixes issues, and iterates until it gets it right.
-5. You open the Power BI application and review the result, just like you would with a teammate’s pull request.
+1. Create a high-level requirement docs, similar to [requirements.md](.input/requirements.md).
+2. Prompt AI agent to create a new semantic model but create a spec before implementation. [prompt example](.input/prompt.md). Give it context about your Power BI development style.
+3. AI creates a development spec – readable, reviewable, and adjustable.
+4. You review the spec, and when OK. Just say **GO** and the agent starts implementing the spec autonomously.
+5. You can ground the development with Best Pratice Analysis (see [.bpa/](.bpa/)). And autonomously fixes issues and iterated until there are no issues.
+6. You open the Power BI application and review the result, just like you would with a teammate’s pull request.
+
+>[!IMPORTANT]
+>Its very important to provide AI knowledge/context about your Power BI development style and Power BI concepts such as PBIP structure. See [.kb/ folder](.kb/).
 
 # 🧪 Try it yourself
 
@@ -20,15 +26,6 @@ In Power BI, this is made possible by open file formats with [Power BI Project f
 2. Install [Visual Studio Code](https://code.visualstudio.com/)
 3. Install [GitHub Copilot extension](https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features/responsible-use-of-github-copilot-chat-in-your-ide?tool=vscode)
 4. Open Github Copilot Chat in [Agent mode](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode)
-5. Attach the [requirements-01.md](.requirements/requirements-01.md) and run the following prompt:
-
-    > Please review the attached requirements and draft a comprehensive development specification in Markdown format for my review.
-
+5. Copy and paste the [prompt](.input/prompt.md) into the chat.
 6. Review the generated development spec, then prompt Copilot to proceed with implementing the semantic model.
-
-See the branch [ai-agent](https://github.com/RuiRomano/pbip-demo-agentic/tree/ai-agent) for an example of what was built by Github Copilot.
-
-> 📌 **Notes** 
-> - The [kb-pbip.md](.resources/kb-pbip.md) file includes important knowledge base that AI will use to better understand PBIP file structure and TMDL.
-> - I got best results using `Claude Sonnet 4` model which requires [GitHub Copilot Pro subscription](https://github.com/features/copilot/plans?cft=copilot_li.features_copilot)
 

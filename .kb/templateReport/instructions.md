@@ -20,7 +20,7 @@
 
 ## Changes to apply to each visual
 
-**ONLY CHANGE the following visuals:**
+**CHANGE the following visuals** by editing editing the `visual.json` file of each visual.
 
 - **title**
   

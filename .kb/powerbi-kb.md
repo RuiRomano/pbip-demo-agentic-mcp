@@ -8,11 +8,11 @@
 
 - Start by creating the semantic model folder structure. Follow the content in [Semantic Model PBIP file structure](#semantic-model-pbip-file-structure)
 - Use the `powerbi-modeling-mcp` MCP server to create an empty model and tools provided by the server for modeling operations. In the end serialize the database to the `definition/` folder of the semantic model PBIP folder.
-- **After the creation of the semantic model perform the following:**
+- **After the creation of the semantic model, ensure its following the best practices:**
   - Run the **Best Practice Analysis** by calling the script `.bpa/bpa.ps1` with arguments `-src [path to the semantic model]` and resolve critical errors found, don't forget to serialize the database back to the folder after fixes. No need to create build automation pipeline, just run the script directly as part of the development phase.
-- **After fixing all the error situations detected by Best Practice Analysis:**
+- **After fixing all the semantic model error situations detected by Best Practice Analysis:**
   - Copy the `templateReport` available in the `.kb` folder to the `*.Report` folder of the semantic model report - overwrite the files that already exist. 
-  - Configure the visuals of the `templateReport` using JSON PBIR format to use the semantic model fields following the instructions in `templateReport/instructions.md`. 
+  - Edit the JSON of ALL the visuals of the `templateReport` included in the instructions `templateReport/instructions.md`. 
 
 ### Semantic model development rules
 
