@@ -19,17 +19,8 @@
               {
                 "textRuns": [
                   {
-                    "value": "MyCompany - ",
+                    "value": "[Report Title]",
                     "textStyle": {
-                      "fontFamily": "Segoe (Bold)",
-                      "fontSize": "24pt",
-                      "color": "#000000"
-                    }
-                  },
-                  {
-                    "value": "[Page name]",
-                    "textStyle": {
-                      "fontWeight": "bold",
                       "fontFamily": "Segoe (Bold)",
                       "fontSize": "24pt",
                       "color": "#000000"

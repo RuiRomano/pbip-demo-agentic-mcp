@@ -1,31 +1,31 @@
 ## CRITICAL
-- If `powerbi-modeling-mcp` MCP server is not available, stop and prompt the user to install it.
+- Make sure `powerbi-modeling-mcp` is available. If not, stop and prompt the user to install it.
+- Learn about the `powerbi-modeling-mcp` tools and always prioritize using Batch tools. For example, when creating columns try to create them in batch using `BatchColumnOperationsTool` instead of one by one using `ColumnOperationsTool`
 
 ## Semantic model development
 
 ### New Semantic Model workflow
 
-- Start by creating the semantic model folder structure. Follow the content in [Semantic Model PBIP files](#semantic-model-pbip-files)
+- Start by creating the semantic model folder structure. Follow the content in [Semantic Model PBIP file structure](#semantic-model-pbip-file-structure)
 - Use the `powerbi-modeling-mcp` MCP server to create an empty model and tools provided by the server for modeling operations. In the end serialize the database to the `definition/` folder of the semantic model PBIP folder.
-- After the creation of the semantic model perform the following:
+- **After the creation of the semantic model perform the following:**
   - Run the **Best Practice Analysis** by calling the script `.bpa/bpa.ps1` with arguments `-src [path to the semantic model]` and resolve critical errors found, don't forget to serialize the database back to the folder after fixes. No need to create build automation pipeline, just run the script directly as part of the development phase.
-- After fixing all the error situations detected by **Best Practice Analysis**:
-  - Copy the `templateReport` available in the `.kb` folder to the `*.Report` folder of the semantic model report - overwrite the files that already exist with same name. 
+- **After fixing all the error situations detected by Best Practice Analysis:**
+  - Copy the `templateReport` available in the `.kb` folder to the `*.Report` folder of the semantic model report - overwrite the files that already exist. 
   - Configure the visuals of the `templateReport` using JSON PBIR format to use the semantic model fields following the instructions in `templateReport/instructions.md`. 
 
 ### Semantic model development rules
 
-- Whenever there is a data source, always create semantic model parameter as named expression to configure it's location. Notice that semantic model parameters are a special expression, look for operations in the MCP specific for parameters.
-- Always prefer simple star-schema modeling and not snowflake. For example if you find tables like Product, ProductSubCategory and ProductCategory. Prefer to create a single Product table that joins these tables.
+- Whenever there is a data source, **always create semantic model parameter as named expression** to configure it's location. Notice that semantic model parameters are a special expression, look for operations in the MCP specific for parameters.
+- Always **prefer simple star-schema modeling and not snowflake**. For example if you find tables like Product, ProductSubCategory and ProductCategory. Prefer to create a single Product table that joins these tables.
+- **The relationship between Calendar and fact table should be made using a datetime column**. If the fact table  dont have a datetime or date column make sure you create one using PowerQuery language
+- If required to **create a Calendar table for time-intelligence**, create it with at least the following time attributes: Year, Month, Day, Date.
+- Unless specified otherwise, **implement the naming convention** in [semantic-model-naming-convention](#semantic-model-naming-convention)
+- Make sure you adhere to the DAX rules described in [DAX rules](#dax-rules)
+- **Semantic model tables cannot have composite keys** and normally only dimensions have a key column configured with `isKey`. Don't set more than one `isKey` column per table.
+- **Make sure that Power Query expressions return the correct data types**. You can use the M function `Table.TransformColumnTypes` that allows you force a specify type for each column.
 - It's ok to have partitions in 'NoData' state. Attempting to refresh might fail because there is no credential defined. 
 - Don't try to test the semantic model data.
-- The relationship between Calendar and fact table should be made using a datetime column. If the fact table  dont have a datetime or date column make sure you create one using PowerQuery language
-- If required to create a Calendar table for time-intelligence, create it with at least the following time attributes: Year, Month, Day, Date.
-- Unless specified otherwise, adhere to the following naming convention in [semantic-model-naming-convention](#semantic-model-naming-convention)
-- Make sure you adhere to the DAX rules described in [DAX rules](#dax-rules)
-- Many to One or One to Many relationships, the one side should be configured on the `fromColumn` and not `toColumn` property of the relationship object.
-- Tables cannot have composite keys and normally only dimensions have a key column configured with `isKey`. Don't set more than one `isKey` column per table.
-- Make sure that Power Query expressions return the correct data types. You can use the M function `Table.TransformColumnTypes` that allows you force a specify type for each column.
 
 #### Semantic Model Table creation workflow
 1. Create tables with Power Query expressions, do not create named expressions for the table query. 
@@ -43,7 +43,7 @@
 3. Set a description. Follow [Semantic model descriptions rules](#semantic-model-descriptions-rules)
 4. If there are many common measures, organize them in display folders.
 
-### Semantic Model PBIP files
+### Semantic Model PBIP file structure
 
 - When creating a new semantic model, ensure you start by creating a PBIP folder structure like the following:
 
@@ -116,7 +116,7 @@
 
 - Use singular names for dimension tables
 - Use plural names for fact tables
-- All object names should be lower case
+- All object names (tables, columns, measures,...)  should be lower case
 - Don't use 'fact' or 'dim' in the table or column names. Prefer business friendly representation
 - Don't use column names like 'product name' prefer 'product' instead
 - Measure names should follow a consistent naming convention: 

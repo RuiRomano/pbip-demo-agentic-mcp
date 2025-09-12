@@ -590,5 +590,16 @@
     "Scope": "DataColumn, CalculatedColumn, CalculatedTableColumn",
     "Expression": "Name.ToUpper().Contains(\"MONTH\")\r\nand\r\n! Name.ToUpper().Contains(\"MONTHS\") \r\nand \r\n\n\nDataType == DataType.String \r\nand \r\nSortByColumn == null",
     "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "META_SUMMARIZE_NONE",
+    "Name": "Don't summarize numeric columns",
+    "Category": "Metadata",
+    "Description": "Set the SummarizeBy property of all visible numeric columns to \"None\", to avoid unintentional summarization in client tools. Create measures for columns that are supposed to be summarized.",
+    "Severity": 2,
+    "Scope": "DataColumn, CalculatedColumn, CalculatedTableColumn",
+    "Expression": "IsVisible\nand SummarizeBy <> \"None\"\nand (DataType = \"Double\" or DataType = \"Decimal\" or DataType = \"Int64\")",
+    "FixExpression": "SummarizeBy = AggregateFunction.None",
+    "CompatibilityLevel": 1200
   }
 ]

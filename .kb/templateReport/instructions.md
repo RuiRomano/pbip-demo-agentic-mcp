@@ -1,13 +1,13 @@
 ## CRITICAL
 
-- Before adapting the report to the semantic model, make sure you understand the business requirements and identify the main measures and dimensions
-- The report is using the PBIR file format, that is a public format for Power BI reports using JSON files. More information in the [docs](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-format). Each page, visual, bookmark, etc., is organized into a separate, individual file within a folder structure. This format is ideal for codevelopment conflict resolution.
+- Before adapting the report to the semantic model, **make sure you understand the business requirements and identify the main measures and dimensions**.
+- **The report is using the PBIR file format**, that is a public format for Power BI reports using JSON files. More information in the [docs](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-format). Each page, visual, bookmark, etc., is organized into a separate, individual file within a folder structure. This format is ideal for codevelopment conflict resolution.
 
 ## Report file organization
 
-These are the files you should care about and manipulate when adapting a template report to a semantic model. All the other files, leave them as-is.
+**These are the files you should care about and edit when adapting the template report to a semantic model**. All the other files, leave them as-is.
 
-    ```
+    ```text
     templateReport/
     ├── definition/ # stores the entire report definition: pages, visuals, bookmarks
     |   ├── /pages # Folder holding all pages of the report.
@@ -20,7 +20,42 @@ These are the files you should care about and manipulate when adapting a templat
 
 ## Changes to apply to each visual
 
-ONLY CHANGE the following visuals:
+**ONLY CHANGE the following visuals:**
+
+- **title**
+  
+  - Figure out a good title to represent this semantic model. 
+  - Change the value of the `textRun` with the title, leave everything as-is.
+
+  Example of the JSON to modify:
+
+  ```json
+    {
+        ...
+        "visual": {
+            "visualType": "textbox",
+            "objects": {
+            "general": [
+                {
+                "properties": {
+                    "paragraphs": [
+                    {
+                        "textRuns": [
+                        {
+                            "value": "[Report Title]",
+                            ...
+                        }
+                        ]
+                    }
+                    ]
+                }
+                }
+            ]
+            }
+        }
+        ...
+    }
+  ```
 
 - **topCard**
   
