@@ -9,7 +9,7 @@ This file defines the **implementation guidelines** an agent must follow when cr
 Ensure you respect the following phases when implementing the Power BI Project.
 
 ### Phase 1: Prepare environment
-1. **Critical**: Make sure **powerbi-modeling-mcp** is available. If not, stop and prompt the user to install it. Learn about the **powerbi-modeling-mcp** tools and always prioritize using Batch tools. For example, when creating objects always try to create them in batches to minimize round-trips.
+1. **Critical**: Make sure **powerbi-modeling-mcp** is available and is used for model development. If not, stop and prompt the user to install it. Learn about the **powerbi-modeling-mcp** tools and always prioritize using Batch tools. For example, when creating objects always try to create them in batches to minimize round-trips.
 2. Create the Power BI Project (PBIP) folder structure as explained in [PBIP file structure](#pbip-file-structure)
 3. Because its PBIP development, there is no Analysis Services server. Thereforce: cannot run DAX queries to test data; cannot run refresh commands; its ok to have partitions in `NoData` state.
 

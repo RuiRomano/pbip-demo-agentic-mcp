@@ -11,6 +11,7 @@ This file defines the **core rules** and **implementation guidelines** an agent 
 - Relationships: default to **single-directional** with `CrossFilteringBehavior = "OneDirection"`
 - When available in the data source, choose **integer keys** for relationships (better performance than strings)
 - **Ensure each dimension has a unique key** - Semantic model tables cannot have composite keys and only dimensions have a key column configured with `isKey`. Don't set more than one `isKey` column per table.
+- Fact tables should not have surrogate keys, its a massive waste of memory.
 - Create all relationships before creating measures (measures may reference relationships)
 - **Always refresh model after creating relationships** to ensure they are calculated
 - **Always create semantic model parameters for Data Source location**. And use them in the table Power Query expressions. For example, `ServerName`, `DatabaseName`. Notice that semantic model parameters are a special expression.
@@ -52,7 +53,7 @@ This file defines the **core rules** and **implementation guidelines** an agent 
    
 ## Measures & DAX
 - Create **explicit measures only**, never rely on implicit aggregations from the numeric aggregatable columns.
-- Store all measures in a dedicated **Measures** table
+- Don't store all measures in a dedicated Measures table.
 - **Validate every measure immediately after creation** - check State property for errors
 - **Create measures in batches of 5-10** to reduce risk and aid debugging
 - Use `DIVIDE()` function instead of `/` operator for safe division
