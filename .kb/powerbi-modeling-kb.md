@@ -4,33 +4,6 @@ This file defines the **core rules** and **implementation guidelines** an agent 
 
 ---
 
-## Before you start
-
-- **CRITICAL:** Take into consideration if there is an Analysis Services server available of if its Offline modeling against a PBIP folder.
-  - When Offline:
-    - Cannot run DAX queries to test data.
-    - Cannot run refresh commands.
-    - It's ok to have partitions in 'NoData' state.
-  
-### High-level implementation phases
-
-#### Phase 1: Data Source Discovery
-1. Understand the Data Source: tables, columns, relationships.
-2. Document existing state (List tables, columns, relationships).
-3. Verity if its suitable to a star-schema, identify fact and dimensions that answer the business requirements.
-
-#### Phase 2: Model implementation
-1. Create all tables and columns
-2. Don't create tables or columns that are not necessary for the business requirements.
-3. Apply relationships between tables
-4. Create measures that answer the business requirements.
-5. Ensure tables, columns and measures are properly documented.
-
-#### Phase 3: Best practices
-1. Ensure modeling best practices
-2. Check for common pitfals
-3. Also run the Best Practice Analysis tool by calling the script `.bpa/bpa.ps1` with arguments `-src [path to the semantic model]` and resolve critical errors found, don't forget to serialize the database back to the folder after fixes. No need to create build automation pipeline, just run the script directly as part of the development phase.
-
 ## Model Structure
 
 - Use a **Star Schema**: fact tables (numbers, transactions) + dimension tables (descriptive attributes). 
@@ -46,8 +19,9 @@ This file defines the **core rules** and **implementation guidelines** an agent 
 - For each table, manually create all required columns with proper data types. The `sourceColumn` column property must map to the column name from the Power Query expression.
 
 ## Naming Conventions
-- Tables: business-friendly names (`Sales`, `Products`, `Customers`)
-- Columns: readable names with spaces (`Order Date`, `Product Name`)
+- Tables: business-friendly names (`Sales`, `Products`, `Customers`). Don't use terms as 'Fact' or 'Dim' in the names
+- Columns: Readable names with spaces (`Order Date`, `Product`, `Unit Price`)
+- Columns: For dimension name prefer a column with the same name of the dimension. `Product` instead of `Product Name`
 - Measures: clear naming patterns (`Total Sales`, `Total Quantity`, `# Customers`, `# Products`)
 - Measures variations (e.g. time intelligence) should follow a consistent naming convention:
   - [measure name] for base measure

@@ -1,19 +1,30 @@
 # powerbi-pbip-kb
 
-This file defines the **general rules** and **implementation guidelines** an agent must follow when creating Power BI Project.
+This file defines the **implementation guidelines** an agent must follow when creating a new Power BI Project.
 
 ---
 
-## Ensure your have the right tools
+## High-level implementation phases 
 
-- **Critical**: Make sure `powerbi-modeling-mcp` is available. If not, stop and prompt the user to install it. Learn about the `powerbi-modeling-mcp` tools and always prioritize using Batch tools. For example, when creating columns try to create them in batch using `BatchColumnOperationsTool` instead of one by one using `ColumnOperationsTool`.
+Ensure you respect the following phases when implementing the Power BI Project.
 
-## New Power BI Project workflow
+### Phase 1: Prepare environment
+1. **Critical**: Make sure **powerbi-modeling-mcp** is available. If not, stop and prompt the user to install it. Learn about the **powerbi-modeling-mcp** tools and always prioritize using Batch tools. For example, when creating objects always try to create them in batches to minimize round-trips.
+2. Create the Power BI Project (PBIP) folder structure as explained in [PBIP file structure](#pbip-file-structure)
+3. Because its PBIP development, there is no Analysis Services server. Thereforce: cannot run DAX queries to test data; cannot run refresh commands; its ok to have partitions in `NoData` state.
 
-- Start by creating the PBIP folder structure. Follow the content in [PBIP file structure](#pbip-file-structure)
-- Start by creating a new empty semantic model. You should serialize the database into the `definition/` folder of the semantic model in the PBIP.
-- **Critical:** Ensure you follow the development style and best practices in `powerbi-modeling-kb.md`.
-- **Critical:** Power BI cannot open the semantic model for edit directly, it must include a report. If there is a `.kb/templateReport` use it instead of the empty report. Follow the instructions in the `template-report-kb.md` to adapt the template report visuals to the created semantic model. Only work in the report when the semantic model development is complete.
+### Phase 2: Semantic Model implementation
+1. Understand the Data Source schema: tables, columns, relationships.
+2. Create a new semantic model, avoid creating tables and columns that are not necessary for the business requirements.
+3. **Critical:** Ensure you follow the semantic model development rules and best practices in `powerbi-modeling-kb.md`.
+
+### Phase 3: Enforce Best practices
+1. Ensure semantic model best practices in `powerbi-modeling-kb.md`.
+3. **Critical:** Also run the Best Practice Analysis tool by calling the script `.bpa/bpa.ps1` with arguments `-src [path to the semantic model]` and resolve critical errors found.Don't forget to serialize the database back to the folder after fixes. No need to create build automation pipeline, just run the script directly as part of the development phase.
+
+### Phase 4: Report implementation
+1. Copy the `.kb/templateReport` content to the empty `definition/` folder of the report in the PBIP. 
+2. Follow the instructions in the `template-report-kb.md` to adapt the report visuals to the semantic model.
 
 ## PBIP file structure
 
