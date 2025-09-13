@@ -1,9 +1,9 @@
-## CRITICAL
 
-- Before adapting the report to the semantic model, **make sure you understand the business requirements and identify the main measures and dimensions**.
-- **The report is using the PBIR file format**, that is a public format for Power BI reports using JSON files. More information in the [docs](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-format). Each page, visual, bookmark, etc., is organized into a separate, individual file within a folder structure. This format is ideal for codevelopment conflict resolution.
+# template-report-kb
 
-## Report file organization
+This file defines the **rules** to adapt the template report using PBIR file format to a semantic model being developed.
+
+**The report is using the PBIR file format**, that is a public format for Power BI reports using JSON files. More information in the [docs](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-format). Each page, visual, bookmark, etc., is organized into a separate, individual file within a folder structure. This format is ideal for codevelopment conflict resolution.
 
 **These are the files you should care about and edit when adapting the template report to a semantic model**. All the other files, leave them as-is.
 
@@ -17,8 +17,18 @@
     |   |   |   |   |   ├── visual.json # The visual.json that should be edited to reference the semantic model fields
     ```
 
+---
 
-## Changes to apply to each visual
+## Before you start
+
+- **CRITICAL:** Make sure you understand the business requirements and have enough context about the semantic model (most important dimensions and columns, most important measures).
+
+
+## Copy template report to PBIP
+
+- Copy the `templateReport` available in the `.kb` folder to the `*.Report` folder of the semantic model report - overwrite the files that already exist. 
+
+## Adapt visuals to semantic model
 
 **CHANGE the following visuals** by editing editing the `visual.json` file of each visual.
 
