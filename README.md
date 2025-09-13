@@ -8,6 +8,10 @@ You can achieve agentic development in Power BI combining the following features
 - Open file formats with [Power BI Project file format (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) with [TMDL language](https://learn.microsoft.com/analysis-services/tmdl/tmdl-overview) and [Power BI enhanced Report format (PBIR)](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop). 
 - MCP Server [powerbi-modeling-mcp](https://github.com/microsoft/powerbi-modeling-mcp)
 
+▶️End-to-End demo: [LinkedIn post & video](https://blank))
+
+See the branch [final](https://github.com/RuiRomano/pbip-demo-agentic-mcp/tree/final) to inspect the final output.
+
 # ⚙️ How does it work?
 
 1. Create a high-level requirement docs, similar to [requirements.md](.input/requirements.md).
