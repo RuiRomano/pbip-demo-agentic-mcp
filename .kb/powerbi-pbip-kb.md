@@ -18,8 +18,8 @@ Ensure you respect the following phases when implementing the Power BI Project.
 2. Create a new semantic model, avoid creating tables and columns that are not necessary for the business requirements.
 3. **Critical:** Ensure you follow the semantic model development rules and best practices in `powerbi-modeling-kb.md`.
 
-### Phase 3: Enforce Best practices
-1. Ensure semantic model best practices in `powerbi-modeling-kb.md`.
+### Phase 3: Enforce Semantic Model Best practices
+1. Ensure the application of the semantic model best practices in `powerbi-modeling-kb.md`.
 3. **Critical:** Also run the Best Practice Analysis tool by calling the script `.bpa/bpa.ps1` with arguments `-src [path to the semantic model]` and resolve critical errors found.Don't forget to serialize the database back to the folder after fixes. No need to create build automation pipeline, just run the script directly as part of the development phase.
 
 ### Phase 4: Report implementation

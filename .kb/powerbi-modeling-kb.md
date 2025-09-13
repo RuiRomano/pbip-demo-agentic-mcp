@@ -102,14 +102,6 @@ This file defines the **core rules** and **implementation guidelines** an agent 
 - **Use single quotes in DAX table references** - `'table'[column]` not "table"[column]
 - **Check case sensitivity of all object names** - Power BI is case-sensitive
 - **Create relationships before dependent measures** - measures may reference relationships
-- **Hide columns after relationships are established** - relationships need visible columns
-- **Table/column names may have unexpected casing** - always verify with List
-- **Measures require relationships to be calculated** - refresh after relationship creation
-- **Update operations need consistent naming** - name in request must match definition
-- **Some DAX queries fail until model is refreshed** - always refresh after structural changes
-- **JSON formatting in tool calls** - avoid complex multiline strings
-- **Test incrementally** - don't create 50 measures without testing
-- **Batch operations of same type** - reduces connection overhead
 - **Document while you build** - easier than adding documentation later.
 
 ## Format String Reference
