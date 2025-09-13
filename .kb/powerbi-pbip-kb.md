@@ -20,10 +20,10 @@ Ensure you respect the following phases when implementing the Power BI Project.
 
 ### Phase 3: Enforce Semantic Model Best practices
 1. Ensure the application of the semantic model best practices in `powerbi-modeling-kb.md`.
-3. **Critical:** Also run the Best Practice Analysis tool by calling the script `.bpa/bpa.ps1` with arguments `-src [path to the semantic model]` and resolve critical errors found.Don't forget to serialize the database back to the folder after fixes. No need to create build automation pipeline, just run the script directly as part of the development phase.
+2. **Critical:** Also execute the Best Practice Analysis script until no critical errors are found. Execute the script `.bpa/bpa.ps1` with arguments `-src [SemanticModel definition folder]`. After each run, serialize the semantic model back to the `definition/` folder.
 
 ### Phase 4: Report implementation
-1. Copy the `.kb/templateReport` content to the empty `definition/` folder of the report in the PBIP. 
+1. Copy the `.kb/templateReport` content to the empty `*Report/definition/` folder of the created report folder.
 2. Follow the instructions in the `template-report-kb.md` to adapt the report visuals to the semantic model.
 
 ## PBIP file structure

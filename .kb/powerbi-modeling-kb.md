@@ -19,8 +19,8 @@ This file defines the **core rules** and **implementation guidelines** an agent 
 - For each table, manually create all required columns with proper data types. The `sourceColumn` column property must map to the column name from the Power Query expression.
 
 ## Naming Conventions
-- Tables: business-friendly names (`Sales`, `Products`, `Customers`). Don't use terms as 'Fact' or 'Dim' in the names
-- Columns: Readable names with spaces (`Order Date`, `Product`, `Unit Price`)
+- Tables: business-friendly names, don't use terms as 'Fact' or 'Dim', use plural names for fact tables and singular names for dimension tables (e.g. `Sales`, `Product`, `Customer`). 
+- Columns: Readable names with spaces (e.g. `Order Date`, `Product`, `Unit Price`)
 - Columns: For dimension name prefer a column with the same name of the dimension. `Product` instead of `Product Name`
 - Measures: clear naming patterns (`Total Sales`, `Total Quantity`, `# Customers`, `# Products`)
 - Measures variations (e.g. time intelligence) should follow a consistent naming convention:
