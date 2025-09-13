@@ -144,7 +144,7 @@ This file defines the **rules** to adapt the template report using PBIR file for
     }
     ```
 
-- **barChart1**
+- **barChart**
 
     - Add a main category column from the model to the Category
     - Add the main measure to the Y axis    
