@@ -33,7 +33,8 @@ This file defines the **core rules** and **implementation guidelines** an agent 
 
 ## Model Structure
 
-- Use a **Star Schema**: fact tables (numbers, transactions) + dimension tables (descriptive attributes). Avoid **Snowflake dimensions**.
+- Use a **Star Schema**: fact tables (numbers, transactions) + dimension tables (descriptive attributes). 
+- Avoid **Snowflake dimensions**, for example if you find tables like Product, ProductSubCategory and ProductCategory. Prefer to create a single Product table that joins these tables.
 - Relationships: default to **single-directional** with `CrossFilteringBehavior = "OneDirection"`
 - When available in the data source, choose **integer keys** for relationships (better performance than strings)
 - **Ensure each dimension has a unique key** - Semantic model tables cannot have composite keys and only dimensions have a key column configured with `isKey`. Don't set more than one `isKey` column per table.
