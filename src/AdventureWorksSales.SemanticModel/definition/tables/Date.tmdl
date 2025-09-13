@@ -1,0 +1,179 @@
+/// Calendar dimension table providing comprehensive date attributes for time intelligence calculations and temporal analysis
+table Date
+	lineageTag: 858a9e74-ca4c-4c41-8952-6efcac01fd05
+	dataCategory: Time
+
+	/// Primary key for date dimension
+	column 'Date Key'
+		dataType: int64
+		isHidden
+		isKey
+		isAvailableInMdx: false
+		lineageTag: 3dfd859c-4921-43e3-a4d2-cc9f5793400a
+		sourceColumn: DateKey
+
+	/// Full date value for time intelligence functions
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 991c0265-1c19-4a2d-b8d3-2f6039278b69
+		dataCategory: Time
+		summarizeBy: none
+		sourceColumn: FullDateAlternateKey
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Calendar year number
+	column Year
+		dataType: int64
+		lineageTag: 7c6afcea-a9a6-440c-b8fd-e7e25aa5c5f8
+		summarizeBy: none
+		sourceColumn: CalendarYear
+
+	/// Calendar quarter with year (e.g., Q1 2023)
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c32e5d4-e1a2-4e3b-a20c-4af6c31829c4
+		summarizeBy: sum
+		sourceColumn: CalendarQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Month name (e.g., January)
+	column Month
+		dataType: string
+		lineageTag: dee4d034-7ebf-4e0d-aaa6-719eadc83991
+		sourceColumn: EnglishMonthName
+		sortByColumn: 'Month Number'
+
+	/// Month number (1-12)
+	column 'Month Number'
+		dataType: int64
+		lineageTag: ae3f10e7-be06-42c0-acb6-22881f8ed0fd
+		summarizeBy: none
+		sourceColumn: MonthNumberOfYear
+
+	column DayNumberOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: 07424347-ac36-4496-8f27-e1a7f8cf8ccc
+		summarizeBy: sum
+		sourceColumn: DayNumberOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column EnglishDayNameOfWeek
+		dataType: string
+		lineageTag: 4309e28b-b021-45b7-a496-74ca88ff617a
+		summarizeBy: none
+		sourceColumn: EnglishDayNameOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column SpanishDayNameOfWeek
+		dataType: string
+		lineageTag: bff28470-e928-428a-a4ec-a4b910e514ec
+		summarizeBy: none
+		sourceColumn: SpanishDayNameOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column FrenchDayNameOfWeek
+		dataType: string
+		lineageTag: 3e1cf6ba-a79a-4eea-9b09-bed3c960c74c
+		summarizeBy: none
+		sourceColumn: FrenchDayNameOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayNumberOfMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: e155a05a-464a-44a0-abe5-9b28db97d304
+		summarizeBy: sum
+		sourceColumn: DayNumberOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayNumberOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: f0229aaa-8730-43bc-8ea4-d5af9a71a9c1
+		summarizeBy: sum
+		sourceColumn: DayNumberOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekNumberOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 74e7ee9b-9698-407c-9350-b45706d21a27
+		summarizeBy: sum
+		sourceColumn: WeekNumberOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column SpanishMonthName
+		dataType: string
+		lineageTag: b4dd469b-cbda-45d0-9637-fcea09755101
+		summarizeBy: none
+		sourceColumn: SpanishMonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column FrenchMonthName
+		dataType: string
+		lineageTag: 76f1d093-bf5b-44b9-ae04-515f0f46b208
+		summarizeBy: none
+		sourceColumn: FrenchMonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalendarSemester
+		dataType: int64
+		formatString: 0
+		lineageTag: 841cdbd8-77b2-4df0-8a2b-17a22fd9b85d
+		summarizeBy: sum
+		sourceColumn: CalendarSemester
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalQuarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ff7acf6-aa86-4ab6-b1d1-db9e75578275
+		summarizeBy: sum
+		sourceColumn: FiscalQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 528cf438-91a7-4332-b63f-a6f67b123455
+		summarizeBy: sum
+		sourceColumn: FiscalYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalSemester
+		dataType: int64
+		formatString: 0
+		lineageTag: ddeab132-4875-45e3-a28d-64262cb9bf81
+		summarizeBy: sum
+		sourceColumn: FiscalSemester
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName),
+				    DimDate = Source{[Schema="dbo",Item="DimDate"]}[Data]
+				in
+				    DimDate
+

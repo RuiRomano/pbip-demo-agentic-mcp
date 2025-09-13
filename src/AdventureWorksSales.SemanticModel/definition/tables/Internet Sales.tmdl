@@ -1,0 +1,266 @@
+/// Internet Sales fact table containing sales transactions from the online channel with detailed sales metrics and foreign keys to related dimensions
+table 'Internet Sales'
+	lineageTag: 7fc79513-a46e-4298-a602-0008a307c9b4
+
+	/// Total sales amount combining Internet and Reseller channels for comprehensive revenue analysis
+	measure 'Total Sales Amount' =
+			VAR __InternetSales = CALCULATE(SUM('Internet Sales'[Sales Amount]))
+			VAR __ResellerSales = CALCULATE(SUM('Reseller Sales'[Sales Amount]))
+			RETURN __InternetSales + __ResellerSales
+		formatString: \$#,##0.00
+		displayFolder: Sales Metrics
+		lineageTag: ac0805bb-fe64-4ab2-af23-0278079e5591
+
+	/// Year-over-year sales growth percentage using time intelligence for trend analysis
+	measure 'Sales YoY Growth %' =
+			VAR __CurrentYear = [Total Sales Amount]
+			VAR __PreviousYear = CALCULATE([Total Sales Amount], SAMEPERIODLASTYEAR('Date'[Date]))
+			RETURN DIVIDE(__CurrentYear - __PreviousYear, __PreviousYear)
+		formatString: 0.00%
+		displayFolder: Growth Analysis
+		lineageTag: 5cb50fca-719b-4281-ad1c-f128aba05bfa
+
+	/// Month-over-month sales growth percentage for short-term performance tracking
+	measure 'Sales MoM Growth %' =
+			VAR __CurrentMonth = [Total Sales Amount]
+			VAR __PreviousMonth = CALCULATE([Total Sales Amount], PREVIOUSMONTH('Date'[Date]))
+			RETURN DIVIDE(__CurrentMonth - __PreviousMonth, __PreviousMonth)
+		formatString: 0.00%
+		displayFolder: Growth Analysis
+		lineageTag: d0306b94-4008-4acd-88e6-3d07418f4af5
+
+	/// Total quantity sold across all sales channels
+	measure 'Total Quantity' = SUM('Internet Sales'[Order Quantity]) + SUM('Reseller Sales'[Order Quantity])
+		formatString: #,##0
+		displayFolder: Sales Metrics
+		lineageTag: 03a7e653-039c-4744-a486-4c69c51378ff
+
+	/// Customer foreign key
+	column 'Customer Key'
+		dataType: int64
+		isHidden
+		isAvailableInMdx: false
+		lineageTag: 9d737bad-d121-4757-b65a-2526bdf4a03e
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+	/// Product foreign key
+	column 'Product Key'
+		dataType: int64
+		isHidden
+		isAvailableInMdx: false
+		lineageTag: f8b6b23a-d06f-478f-8063-f2ba70f8b74a
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+	/// Order date foreign key
+	column 'Order Date Key'
+		dataType: int64
+		isHidden
+		isAvailableInMdx: false
+		lineageTag: 215cf448-5aa5-46ec-bc0f-a12f720c3a8f
+		summarizeBy: none
+		sourceColumn: OrderDateKey
+
+	/// Total sales amount for the transaction
+	column 'Sales Amount'
+		dataType: decimal
+		isHidden
+		formatString: \$#,##0.00
+		isAvailableInMdx: false
+		lineageTag: 7e536b66-dc24-479c-b8b1-cc8863624d96
+		summarizeBy: none
+		sourceColumn: SalesAmount
+
+	/// Quantity of products ordered
+	column 'Order Quantity'
+		dataType: int64
+		isHidden
+		formatString: #,##0
+		isAvailableInMdx: false
+		lineageTag: b7759c74-9293-4f6d-9164-b9c6567cf941
+		summarizeBy: none
+		sourceColumn: OrderQuantity
+
+	column SalesOrderNumber
+		dataType: string
+		lineageTag: a3557381-19b9-47fe-b07d-0c84ca8ee881
+		summarizeBy: none
+		sourceColumn: SalesOrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesOrderLineNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: edb4a3db-d875-4326-a719-2fadffe4d558
+		summarizeBy: sum
+		sourceColumn: SalesOrderLineNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column DueDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: df83b9b5-7949-4d9f-b97d-4b0b6d8f8a25
+		summarizeBy: count
+		sourceColumn: DueDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShipDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: d5a36726-b389-482b-95b1-e9f69c2b11e9
+		summarizeBy: count
+		sourceColumn: ShipDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PromotionKey
+		dataType: int64
+		formatString: 0
+		lineageTag: e33937c7-841e-4196-82f1-15e7f5e4bf9f
+		summarizeBy: count
+		sourceColumn: PromotionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 41c1fbcc-50b5-49a8-b136-24fa41de7cff
+		summarizeBy: count
+		sourceColumn: CurrencyKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesTerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: f4b95bf2-730e-490a-b84f-8cf9a2ddba07
+		summarizeBy: count
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: decimal
+		formatString: "€"#,0.###############;("€"#,0.###############);"€"#,0.###############
+		lineageTag: 7a66e0f7-5fd5-45c5-9baa-7f26efbdcc8f
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column ExtendedAmount
+		dataType: decimal
+		formatString: "€"#,0.###############;("€"#,0.###############);"€"#,0.###############
+		lineageTag: 75db8c58-1590-43fa-ae24-0395ff941005
+		summarizeBy: sum
+		sourceColumn: ExtendedAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column UnitPriceDiscountPct
+		dataType: double
+		lineageTag: c1d45c67-a489-440b-ac2d-a86f2886d186
+		summarizeBy: sum
+		sourceColumn: UnitPriceDiscountPct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DiscountAmount
+		dataType: double
+		lineageTag: 055f06c0-8eb7-4c2c-9b1c-e221a1c5b8f3
+		summarizeBy: sum
+		sourceColumn: DiscountAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ProductStandardCost
+		dataType: decimal
+		formatString: "€"#,0.###############;("€"#,0.###############);"€"#,0.###############
+		lineageTag: e2895f7b-3f2a-4827-9519-b6bd92c93d3d
+		summarizeBy: sum
+		sourceColumn: ProductStandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column TotalProductCost
+		dataType: decimal
+		formatString: "€"#,0.###############;("€"#,0.###############);"€"#,0.###############
+		lineageTag: 5d788899-7008-4897-b16a-1406591754da
+		summarizeBy: sum
+		sourceColumn: TotalProductCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column TaxAmount
+		dataType: decimal
+		formatString: "€"#,0.###############;("€"#,0.###############);"€"#,0.###############
+		lineageTag: fa4b9ed1-466d-4cc0-b18e-2b57db6cc9ce
+		summarizeBy: sum
+		sourceColumn: TaxAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column FreightAmount
+		dataType: decimal
+		formatString: "€"#,0.###############;("€"#,0.###############);"€"#,0.###############
+		lineageTag: 88d37be8-b38b-487a-8833-a090a7031647
+		summarizeBy: sum
+		sourceColumn: FreightAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column CarrierTrackingNumber
+		dataType: string
+		lineageTag: 22ec3f26-29da-417a-803f-ba260f00d9c1
+		summarizeBy: none
+		sourceColumn: CarrierTrackingNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerPONumber
+		dataType: string
+		lineageTag: d7715436-fee5-4976-bdd8-6bd1b3bc232e
+		summarizeBy: none
+		sourceColumn: CustomerPONumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column RevisionNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e16f955-d3cd-4c1a-bae7-03f70ba5a02d
+		summarizeBy: sum
+		sourceColumn: RevisionNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Internet Sales' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName),
+				    FactInternetSales = Source{[Schema="dbo",Item="FactInternetSales"]}[Data]
+				in
+				    FactInternetSales
+

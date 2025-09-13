@@ -1,0 +1,24 @@
+relationship 'Internet Sales to Date'
+	fromColumn: 'Internet Sales'.'Order Date Key'
+	toColumn: Date.'Date Key'
+
+relationship 'Internet Sales to Product'
+	fromColumn: 'Internet Sales'.'Product Key'
+	toColumn: Product.'Product Key'
+
+relationship 'Internet Sales to Customer'
+	fromColumn: 'Internet Sales'.'Customer Key'
+	toColumn: Customer.'Customer Key'
+
+relationship 'Reseller Sales to Date'
+	fromColumn: 'Reseller Sales'.'Order Date Key'
+	toColumn: Date.'Date Key'
+
+relationship 'Reseller Sales to Product'
+	fromColumn: 'Reseller Sales'.'Product Key'
+	toColumn: Product.'Product Key'
+
+relationship 'Reseller Sales to Reseller'
+	fromColumn: 'Reseller Sales'.'Reseller Key'
+	toColumn: Reseller.'Reseller Key'
+

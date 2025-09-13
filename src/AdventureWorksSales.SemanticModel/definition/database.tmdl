@@ -1,0 +1,4 @@
+/// Adventure Works Sales Analytics semantic model for analyzing sales performance across Internet and Reseller channels
+database
+	compatibilityLevel: 1604
+

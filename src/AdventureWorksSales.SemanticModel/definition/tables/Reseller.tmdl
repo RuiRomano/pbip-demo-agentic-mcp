@@ -1,0 +1,190 @@
+/// Reseller dimension for channel sales providing reseller business information and attributes
+table Reseller
+	lineageTag: 84f20d44-e39c-4c59-ac6e-2ab850ad5aa5
+
+	/// Count of unique resellers who made purchases
+	measure '# Resellers' = DISTINCTCOUNT('Reseller Sales'[Reseller Key])
+		formatString: #,##0
+		displayFolder: Reseller Metrics
+		lineageTag: e4766719-1c83-4743-9e31-13299ed8bc1d
+
+	/// Primary key for reseller dimension
+	column 'Reseller Key'
+		dataType: int64
+		isHidden
+		isKey
+		isAvailableInMdx: false
+		lineageTag: 9b8a128d-cbf7-40f3-8d06-b10fd1b70627
+		sourceColumn: ResellerKey
+
+	/// Reseller business name
+	column Reseller
+		dataType: string
+		lineageTag: 3236b9be-0ce9-451f-a660-1f3e8f5b64d6
+		sourceColumn: ResellerName
+
+	/// Reseller business type
+	column 'Business Type'
+		dataType: string
+		lineageTag: 01749678-e867-4819-ad3d-fefa5b17d6d1
+		sourceColumn: BusinessType
+
+	/// Number of employees at reseller
+	column 'Number of Employees'
+		dataType: int64
+		lineageTag: 32a4f65c-3ebc-4d50-82ff-731babb590ca
+		summarizeBy: none
+		sourceColumn: NumberEmployees
+
+	column GeographyKey
+		dataType: int64
+		formatString: 0
+		lineageTag: ce220a1f-1cbb-4535-8dd8-8a27f7db8005
+		summarizeBy: none
+		sourceColumn: GeographyKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResellerAlternateKey
+		dataType: string
+		lineageTag: 3c942d7a-32ae-4179-b396-32285ffa553a
+		summarizeBy: none
+		sourceColumn: ResellerAlternateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Phone
+		dataType: string
+		lineageTag: 3e502ce9-d4af-4857-ac0a-ab8e0f29d4b0
+		summarizeBy: none
+		sourceColumn: Phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderFrequency
+		dataType: string
+		lineageTag: df7d1092-9b22-460d-bfd0-043820d6a3c1
+		summarizeBy: none
+		sourceColumn: OrderFrequency
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: 68322862-f7fa-45db-9216-1ae134047f89
+		summarizeBy: none
+		sourceColumn: OrderMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstOrderYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f636c4a-5cbc-42c7-9311-8ad4c8d36732
+		summarizeBy: none
+		sourceColumn: FirstOrderYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastOrderYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 17fcb914-f745-4c70-aafa-afe0e2df9826
+		summarizeBy: none
+		sourceColumn: LastOrderYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductLine
+		dataType: string
+		lineageTag: e2383892-a71c-4ce5-97a5-5bbe57df4a7b
+		summarizeBy: none
+		sourceColumn: ProductLine
+
+		annotation SummarizationSetBy = Automatic
+
+	column AddressLine1
+		dataType: string
+		lineageTag: 1fa43365-5df1-45b6-8a3e-bfd059803277
+		summarizeBy: none
+		sourceColumn: AddressLine1
+
+		annotation SummarizationSetBy = Automatic
+
+	column AddressLine2
+		dataType: string
+		lineageTag: 373a8db0-62fa-4476-addb-384e0d2a4463
+		summarizeBy: none
+		sourceColumn: AddressLine2
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnnualSales
+		dataType: decimal
+		formatString: "€"#,0.###############;("€"#,0.###############);"€"#,0.###############
+		lineageTag: 5eaacfde-58c6-4c05-ad76-cee936e10094
+		summarizeBy: none
+		sourceColumn: AnnualSales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column BankName
+		dataType: string
+		lineageTag: 9f2ed9d5-866a-4bdd-bbad-b9b23adc9aad
+		summarizeBy: none
+		sourceColumn: BankName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MinPaymentType
+		dataType: int64
+		formatString: 0
+		lineageTag: 39a8c039-abc9-4306-b5b6-6c3159d105bf
+		summarizeBy: none
+		sourceColumn: MinPaymentType
+
+		annotation SummarizationSetBy = Automatic
+
+	column MinPaymentAmount
+		dataType: decimal
+		formatString: "€"#,0.###############;("€"#,0.###############);"€"#,0.###############
+		lineageTag: f02e4ce4-f6e9-4930-b8ff-d930da9a5c82
+		summarizeBy: none
+		sourceColumn: MinPaymentAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column AnnualRevenue
+		dataType: decimal
+		formatString: "€"#,0.###############;("€"#,0.###############);"€"#,0.###############
+		lineageTag: 39f7caae-4914-44f0-91cc-860de19cbed7
+		summarizeBy: none
+		sourceColumn: AnnualRevenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column YearOpened
+		dataType: int64
+		formatString: 0
+		lineageTag: 1fa9f2fe-12a3-4a51-80be-7fad66d9e825
+		summarizeBy: none
+		sourceColumn: YearOpened
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Reseller = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName),
+				    DimReseller = Source{[Schema="dbo",Item="DimReseller"]}[Data]
+				in
+				    DimReseller
+

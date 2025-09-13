@@ -1,0 +1,259 @@
+
+# template-report-kb
+
+This file defines the **rules** to adapt the template report using PBIR file format to a semantic model being developed.
+
+**The report is using the PBIR file format**, that is a public format for Power BI reports using JSON files. More information in the [docs](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-format). Each page, visual, bookmark, etc., is organized into a separate, individual file within a folder structure. This format is ideal for codevelopment conflict resolution.
+
+**These are the files you should care about and edit when adapting the template report to a semantic model**. All the other files, leave them as-is.
+
+    ```text
+    templateReport/
+    ├── definition/ # stores the entire report definition: pages, visuals, bookmarks
+    |   ├── /pages # Folder holding all pages of the report.
+    |   |   ├── /mainPage
+    |   |   |   ├── /visuals
+    |   |   |   |   ├── /[visualName] # Folder for each visual, inside the mainPage there are many visuals
+    |   |   |   |   |   ├── visual.json # The visual.json that should be edited to reference the semantic model fields
+    ```
+
+---
+
+## Before you start
+
+- **CRITICAL:** Make sure you understand the business requirements and have enough context about the semantic model (most important dimensions and columns, most important measures).
+
+
+## Copy template report to PBIP
+
+- Copy the `templateReport` available in the `.kb` folder to the `*.Report` folder of the semantic model report - overwrite the files that already exist. 
+
+## Adapt visuals to semantic model
+
+**CHANGE the following visuals** by editing editing the `visual.json` file of each visual.
+
+- **title**
+  
+  - Figure out a good title to represent this semantic model. 
+  - Change the value of the `textRun` with the title, leave everything as-is.
+
+  Example of the JSON to modify:
+
+  ```json
+    {
+        ...
+        "visual": {
+            "visualType": "textbox",
+            "objects": {
+            "general": [
+                {
+                "properties": {
+                    "paragraphs": [
+                    {
+                        "textRuns": [
+                        {
+                            "value": "[Report Title]",
+                            ...
+                        }
+                        ]
+                    }
+                    ]
+                }
+                }
+            ]
+            }
+        }
+        ...
+    }
+  ```
+
+- **topCard**
+  
+  - add all the main semantic model measures to it to the max of 4 measures
+
+  Example of the JSON to modify:
+
+  ```json
+  {
+    ...
+    "visual": {
+      "query": {
+        "queryState": {
+          "Data": {
+            "projections": [
+              {
+                "field": {
+                  "Measure": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "[table name]"
+                      }
+                    },
+                    "Property": "[measure name]"
+                  }
+                },
+                "queryRef": "[table name].[measure name]",
+                "nativeQueryRef": "[measure name]"
+              }
+              ...            
+            ]
+          }
+        }
+      }   
+    }
+    ...
+  }
+  ```
+
+- **dateSlicer**
+
+    - Add the date column from the Calendar table
+    - Only one column
+
+    Example of the JSON to modify:
+
+    ```json
+    { 
+        ...
+        "visual": {    
+            "query": {
+            "queryState": {
+                "Values": {
+                "projections": [
+                    {
+                    "field": {
+                        "Column": {
+                        "Expression": {
+                            "SourceRef": {
+                            "Entity": "[table name]"
+                            }
+                        },
+                        "Property": "[column name]"
+                        }
+                    },
+                    "queryRef": "[table name].[column name]",
+                    "nativeQueryRef": "[column name]",
+                    "active": true
+                    }
+                ]
+                }
+            }
+            }
+        }
+        ...  
+    }
+    ```
+
+- **barChart**
+
+    - Add a main category column from the model to the Category
+    - Add the main measure to the Y axis    
+
+    Example of the JSON to modify:
+
+    ```json
+    { 
+        ...
+        "visual": {    
+            "query": {
+                "queryState": {
+                    "Category": {
+                        "projections": [
+                            {
+                            "field": {
+                                "Column": {
+                                "Expression": {
+                                    "SourceRef": {
+                                    "Entity": "[table name]"
+                                    }
+                                },
+                                "Property": "[column name]"
+                                }
+                            },
+                            "queryRef": "[table name].[column name]",
+                            "nativeQueryRef": "[column name]",
+                            "active": true
+                            }
+                        ]
+                    },
+                    "Y": {
+                        "projections": [
+                            {
+                            "field": {
+                                "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                    "Entity": "[table name]"
+                                    }
+                                },
+                                "Property": "[measure name]"
+                                }
+                            },
+                            "queryRef": "[table name].[measure name]",
+                            "nativeQueryRef": "[measure name]"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+        ...  
+    }
+    ```
+
+- **timeSeries**
+
+    - Add a date field from the Calendar table to the Category    
+    - Add the main measure to the Y axis    
+
+    Example of the JSON to include:
+
+    ```json
+    { 
+        ...
+        "visual": {            
+            "query": {
+                "queryState": {
+                    "Category": {
+                        "projections": [
+                            {
+                            "field": {
+                                "Column": {
+                                "Expression": {
+                                    "SourceRef": {
+                                    "Entity": "[table name]"
+                                    }
+                                },
+                                "Property": "[column name]"
+                                }
+                            },
+                            "queryRef": "[table name].[column name]",
+                            "nativeQueryRef": "[column name]",
+                            "active": true
+                            }
+                        ]
+                    },
+                    "Y": {
+                        "projections": [
+                            {
+                            "field": {
+                                "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                    "Entity": "[table name]"
+                                    }
+                                },
+                                "Property": "[measure name]"
+                                }
+                            },
+                            "queryRef": "[table name].[measure name]",
+                            "nativeQueryRef": "[measure name]"
+                            }
+                        ]
+                    }
+                }
+            }            
+        },
+        ...  
+    }
+    ```

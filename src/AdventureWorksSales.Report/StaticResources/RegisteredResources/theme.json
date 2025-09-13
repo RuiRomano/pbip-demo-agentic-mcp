@@ -1,0 +1,17 @@
+{
+  "name": "Company_Dark",
+  "dataColors": [
+    "#03071e",
+    "#370617",
+    "#6a040f",
+    "#9d0208",
+    "#d00000",
+    "#dc2f02",
+    "#e85d04",
+    "#f48c06"
+  ],
+  "tableAccent": "#262A76",
+  "maximum": "#262A76",
+  "center": "#8E1F20",
+  "minimum": "#F1F1F1"
+}

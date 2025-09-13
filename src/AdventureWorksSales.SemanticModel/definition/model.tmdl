@@ -1,0 +1,19 @@
+model AdventureWorksSales
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_ProTooling = ["MCP-PBIModeling","TMDL-Extension","DevMode"]
+
+annotation PBI_QueryOrder = ["Date","Product","Customer","Reseller","Internet Sales","Reseller Sales","ServerName","DatabaseName"]
+
+ref table Date
+ref table Product
+ref table Customer
+ref table Reseller
+ref table 'Internet Sales'
+ref table 'Reseller Sales'
+

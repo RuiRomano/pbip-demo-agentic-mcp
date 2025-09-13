@@ -1,0 +1,12 @@
+/// SQL Server instance name for Adventure Works data warehouse connection
+expression ServerName = "dummy.database.windows.net" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: dc887694-1f04-4bce-871f-e078d22b77e4
+
+	annotation PBI_ResultType = Text
+
+/// Database name for Adventure Works data warehouse
+expression DatabaseName = "AdventureWorksDW" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 3bc67017-6ebd-4fee-80bb-8976248b3a91
+
+	annotation PBI_ResultType = Text
+
