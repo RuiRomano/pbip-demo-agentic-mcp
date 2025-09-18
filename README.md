@@ -12,7 +12,7 @@ You can achieve agentic development in Power BI combining the following features
 >[!IMPORTANT]
 >**powerbi-modeling-mcp** is currently in private preview. If you're interested in trying it out, you can sign up [here](https://forms.office.com/r/0MXYd6uzwE).
 
-▶️End-to-End demo: [LinkedIn post & video](https://www.linkedin.com/feed/update/urn:li:activity:7347917906363518977/?commentUrn=urn%3Ali%3Acomment%3A(ugcPost%3A7347917694953754625%2C7348260275357204482)&dashCommentUrn=urn%3Ali%3Afsd_comment%3A(7348260275357204482%2Curn%3Ali%3AugcPost%3A7347917694953754625)))
+▶️End-to-End demo: [LinkedIn post & video](https://www.linkedin.com/posts/ruiromano_powerbi-agenticdevelopment-activity-7347917906363518977-tG-U?utm_source=share&utm_medium=member_desktop&rcm=ACoAAALWDywB9c6Gn0_KgodALqsO-wFYG9PvaOk)
 
 See the branch [final](https://github.com/RuiRomano/pbip-demo-agentic-mcp/tree/final) to inspect the final output.
 
