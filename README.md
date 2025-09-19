@@ -1,5 +1,3 @@
-This repository showcases Agentic AI development in Power BI.
-
 # 🔍 What is Agentic Development?
 
 Agentic development is a new paradigm where developers shift from writing code or using UI applications to guiding intelligent agents. The developer defines the what - the requirements, rules, and intent - and the AI agent handles the how - generating specs, implementing the model, running validations, fixing issues, and iterating toward a working solution. 
