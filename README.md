@@ -7,12 +7,12 @@ Agentic development is a new paradigm where developers shift from writing code o
 You can achieve agentic development in Power BI combining the following features:
 - Open file formats with [Power BI Project file format (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview) with [TMDL language](https://learn.microsoft.com/analysis-services/tmdl/tmdl-overview) and [Power BI enhanced Report format (PBIR)](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop). 
 - MCP Server [powerbi-modeling-mcp](https://github.com/microsoft/powerbi-modeling-mcp)
-
+- Ensure the AI has context information on your Power BI development style. See [.kb/](.kb/) for an example.
 
 >[!IMPORTANT]
->**powerbi-modeling-mcp** is currently in private preview. If you're interested in trying it out, you can sign up [here](https://forms.office.com/r/0MXYd6uzwE).
+>**powerbi-modeling-mcp** is currently in private preview. If you're interested in trying it out, sign up [here](https://forms.office.com/r/0MXYd6uzwE).
 
-▶️End-to-End demo: [LinkedIn post & video](https://www.linkedin.com/posts/ruiromano_powerbi-agenticdevelopment-activity-7347917906363518977-tG-U?utm_source=share&utm_medium=member_desktop&rcm=ACoAAALWDywB9c6Gn0_KgodALqsO-wFYG9PvaOk)
+▶️End-to-End demo: [here](https://www.youtube.com/watch?v=7fNDTvLbN2A)
 
 See the branch [final](https://github.com/RuiRomano/pbip-demo-agentic-mcp/tree/final) to inspect the final output.
 
@@ -32,8 +32,8 @@ See the branch [final](https://github.com/RuiRomano/pbip-demo-agentic-mcp/tree/f
 
 1. Clone this Repo into your laptop
 2. Install [Visual Studio Code](https://code.visualstudio.com/)
-3. Install [GitHub Copilot extension](https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features/responsible-use-of-github-copilot-chat-in-your-ide?tool=vscode)
+3. Install[GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) and [GitHub Copilot chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)
 4. Open Github Copilot Chat in [Agent mode](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode)
 5. Copy and paste the [prompt](.input/prompt.md) into the chat.
-6. Review the generated development spec, then prompt Copilot to proceed with implementing the semantic model.
+6. Review the generated development spec, then prompt Copilot to proceed with implementation.
 
